@@ -4,12 +4,18 @@ namespace Tester.JsonModels
 {
     public class Ticket
     {
-        public string question { get; set; }
-        public List<Answer> answers { get; set; }
-        public bool? multiselect { get; set; }
-        public string comment { get; set; }
-        public List<AnswersLeft> answersLeft { get; set; }
-        public List<AnswersRight> answersRight { get; set; }
-        public bool? match { get; set; }
+        public string Question { get; set; }
+
+        public List<Answer> Answers { get; set; }
+
+        public string Comment { get; set; }
+
+        public List<AnswersLeft> AnswersLeft { get; set; }
+
+        public List<AnswersRight> AnswersRight { get; set; }
+
+        public bool? Multiselect { get; set; }
+
+        public bool? Match { get; set; }
     }
 }
