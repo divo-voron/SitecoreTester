@@ -4,31 +4,31 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Tester.Models;
 
-namespace Tester
+namespace Tester.Infrastructure.QuestionnaireRepository
 {
-    public class Questionnaire
+    public abstract class Questionnaire : IQuestionnaire
     {
-        private readonly List<QuestionModel> _questions;
+        protected List<QuestionModel> Questions;
 
-        public Questionnaire(List<QuestionModel> questions)
+        public void Init(List<QuestionModel> questions)
         {
-            _questions = questions;
+            Questions = questions;
         }
 
         public void Start()
         {
-            var maxScore = _questions.Count;
+            var maxScore = Questions.Count;
 
-            for (var index = 0; index < _questions.Count; index++)
+            for (var index = 0; index < Questions.Count; index++)
             {
                 Console.WriteLine($"QuestionModel {index + 1} from {maxScore}");
                 Console.WriteLine();
 
-                var data = _questions[index];
+                var data = Questions[index];
                 PrintQuestion(data);
                 PrintAnswers(data);
 
-                if (data.IsMultiselect == true)
+                if (data.IsMultiselect)
                 {
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine("There is several correct Answers");
@@ -44,11 +44,11 @@ namespace Tester
 
         public void GetResult()
         {
-            var score = _questions.Count(x => x.IsCorrect);
-            var round = Math.Round(decimal.Divide(score, _questions.Count) * 100, 0);
+            var score = Questions.Count(x => x.IsCorrect);
+            var round = Math.Round(decimal.Divide(score, Questions.Count) * 100, 0);
             Console.WriteLine($"Score: {round}%");
 
-            var testResults = _questions
+            var testResults = Questions
                 .Where(x => x.IsCorrect == false)
                 .GroupBy(x => x.Theme)
                 .OrderBy(x => x.Key);

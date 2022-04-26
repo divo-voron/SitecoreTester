@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using Tester.JsonModels;
+using Tester.JsonModels.SC102;
 using Tester.Models;
 
-namespace Tester
+namespace Tester.Infrastructure.MapperRepository
 {
-    public static class Converter
+    public class MapperSC102 : IMapper
     {
-        public static Root ReadFromFile(string path)
+        public List<QuestionModel> MapToObject(string json)
         {
-            using var r = new StreamReader(path);
-            var json = r.ReadToEnd();
             var root = JsonConvert.DeserializeObject<Root>(json);
 
-            return root;
-        }
-
-        public static List<QuestionModel> Map(Root root)
-        {
             var questions = new List<QuestionModel>();
             foreach (var data in root.Data)
             {
@@ -35,21 +26,6 @@ namespace Tester
                     IsMatch = x.Match ?? false,
                     Comment = x.Comment
                 }));
-            }
-
-            return questions;
-        }
-
-        public static List<QuestionModel> Random(this List<QuestionModel> questions)
-        {
-            var rand = new Random();
-            for (var i = questions.Count - 1; i >= 1; i--)
-            {
-                var j = rand.Next(i + 1);
-
-                var tmp = questions[j];
-                questions[j] = questions[i];
-                questions[i] = tmp;
             }
 
             return questions;

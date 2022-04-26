@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tester.JsonModels
+namespace Tester.JsonModels.SC93
 {
     public class Datum
     {

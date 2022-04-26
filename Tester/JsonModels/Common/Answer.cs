@@ -1,4 +1,4 @@
-﻿namespace Tester.JsonModels
+﻿namespace Tester.JsonModels.Common
 {
     public class Answer
     {
