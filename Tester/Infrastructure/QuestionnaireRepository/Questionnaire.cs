@@ -59,73 +59,44 @@ namespace Tester.Infrastructure.QuestionnaireRepository
             }
         }
 
-        private void PrintQuestion(QuestionModel data)
+        protected virtual void PrintQuestion(QuestionModel data)
         {
             var regex = new Regex("(.*)\\{(\\w+)\\|bold}(.*)");
             var m = regex.Match(data.Question);
 
-            if (data.IsMatch)
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            if (m.Success && m.Groups.Count == 4)
             {
-                Console.WriteLine("Skip this question");
+                Console.Write(m.Groups[1]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(m.Groups[2]);
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine(m.Groups[3]);
+                Console.WriteLine();
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                if (m.Success && m.Groups.Count == 4)
-                {
-                    Console.Write(m.Groups[1]);
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write(m.Groups[2]);
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine(m.Groups[3]);
-                    Console.WriteLine();
-                }
-                else
-                {
-                    Console.WriteLine(data.Question);
-                    Console.WriteLine();
-                }
+                Console.WriteLine(data.Question);
+                Console.WriteLine();
             }
-
-            
-            Console.ResetColor();
         }
 
-        private void PrintAnswers(QuestionModel data)
+        protected virtual void PrintAnswers(QuestionModel data)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            if (data.IsMatch)
+
+            for (var i = 0; i < data.Answers.Count; i++)
             {
-                //for (var i = 0; i < data.AnswersLeft.Count; i++)
-                //{
-                //    var answer = data.AnswersLeft[i];
-                //    Console.WriteLine($"{i + 1}. {answer.Text}");
-                //    Console.WriteLine();
-                //}
-                //Console.WriteLine();
-                //Console.ForegroundColor = ConsoleColor.Yellow;
-                //for (var i = 0; i < data.AnswersRight.Count; i++)
-                //{
-                //    var answer = data.AnswersRight[i];
-                //    Console.WriteLine($"{i + 1}. {answer.Text}");
-                //    Console.WriteLine();
-                //}
-            }
-            else
-            {
-                for (var i = 0; i < data.Answers.Count; i++)
-                {
-                    var answer = data.Answers[i];
-                    Console.WriteLine($"{i + 1}. {answer.Text}");
-                    Console.WriteLine();
-                }
+                var answer = data.Answers[i];
+                Console.WriteLine($"{i + 1}. {answer.Text}");
+                Console.WriteLine();
             }
 
             Console.WriteLine();
             Console.ResetColor();
         }
 
-        private IEnumerable<int> ReadAnswers()
+        protected virtual IEnumerable<int> ReadAnswers()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
 

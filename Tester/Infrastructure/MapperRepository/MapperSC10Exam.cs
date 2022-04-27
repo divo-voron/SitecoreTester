@@ -15,11 +15,8 @@ namespace Tester.Infrastructure.MapperRepository
             return root.Tickets.Select(ticket => new QuestionModel()
                 {
                     Answers = ticket.Answers,
-                    AnswersLeft = ticket.AnswersLeft,
-                    AnswersRight = ticket.AnswersRight,
                     Question = ticket.Question,
                     IsMultiselect = ticket.Multiselect ?? false,
-                    IsMatch = ticket.Match ?? false,
                     Comment = ticket.Comment
                 })
                 .ToList();

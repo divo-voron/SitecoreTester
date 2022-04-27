@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Tester.JsonModels.Common;
-using Tester.JsonModels.SC93;
 
 namespace Tester.JsonModels.SC10Exam
 {
@@ -14,12 +13,6 @@ namespace Tester.JsonModels.SC10Exam
 
         public string Comment { get; set; }
 
-        public List<AnswersLeft> AnswersLeft { get; set; }
-
-        public List<AnswersRight> AnswersRight { get; set; }
-
         public bool? Multiselect { get; set; }
-
-        public bool? Match { get; set; }
     }
 }

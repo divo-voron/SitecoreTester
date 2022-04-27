@@ -19,11 +19,8 @@ namespace Tester.Infrastructure.MapperRepository
                 {
                     Theme = data.Theme,
                     Answers = x.Answers,
-                    AnswersLeft = x.AnswersLeft,
-                    AnswersRight = x.AnswersRight,
                     Question = x.Question,
                     IsMultiselect = x.Multiselect ?? false,
-                    IsMatch = x.Match ?? false,
                     Comment = x.Comment
                 }));
             }

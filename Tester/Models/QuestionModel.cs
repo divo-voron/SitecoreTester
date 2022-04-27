@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Tester.JsonModels.Common;
-using Tester.JsonModels.SC93;
 
 namespace Tester.Models
 {
